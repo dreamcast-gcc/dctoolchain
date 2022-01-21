@@ -43,22 +43,22 @@ jobs:
     - name: Runs all stages
       run: |
         export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-        export PSPDEV=$PWD/pspdev
-        export PATH=$PATH:$PSPDEV/bin
+        export DCDEV=$PWD/dcdev
+        export PATH=$PATH:$DCDEV/bin
         ./toolchain.sh
-    
+
     - name: Get short SHA
       id: slug
       run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
-    
-    - name: Compress pspdev folder
+
+    - name: Compress dcdev folder
       run: |
-        tar -zcvf pspdev.tar.gz pspdev
-    
+        tar -zcvf dcdev.tar.gz dcdev
+
     - uses: actions/upload-artifact@v2
       with:
-        name: pspdev-${{ steps.slug.outputs.sha8 }}-${{ matrix.os[0] }}
-        path: pspdev.tar.gz
+        name: dcdev-${{ steps.slug.outputs.sha8 }}-${{ matrix.os[0] }}
+        path: dcdev.tar.gz
 
   build-docker:
     runs-on: ubuntu-latest
@@ -75,28 +75,28 @@ jobs:
         apt-get -y update
         DEBIAN_FRONTEND="noninteractive" TZ="Europe/London" apt-get -y install file bison make flex texinfo gettext \
           g++ gcc git libgmp3-dev libmpfr-dev libmpc-dev libncurses5-dev
-    
+
     - name: Install dependencies Fedora
       if: matrix.os[0] == 'fedora'
       run: |
         dnf -y install gcc gcc-c++ make git gettext texinfo bison flex gmp-devel mpfr-devel libmpc-devel \
           ncurses-devel diffutils
-        
+
     - name: Runs all the stages in the shell
       run: |
-        export PSPDEV=$PWD/pspdev
-        export PATH=$PATH:$PSPDEV/bin
+        export DCDEV=$PWD/dcdev
+        export PATH=$PATH:$DCDEV/bin
         ./toolchain.sh
-        
+
     - name: Get short SHA
       id: slug
       run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
-    
-    - name: Compress pspdev folder
+
+    - name: Compress dcdev folder
       run: |
-        tar -zcvf pspdev.tar.gz pspdev
-    
+        tar -zcvf dcdev.tar.gz dcdev
+
     - uses: actions/upload-artifact@v2
       with:
-        name: pspdev-${{ steps.slug.outputs.sha8 }}-${{ matrix.os[0] }}
-        path: pspdev.tar.gz
+        name: dcdev-${{ steps.slug.outputs.sha8 }}-${{ matrix.os[0] }}
+        path: dcdev.tar.gz

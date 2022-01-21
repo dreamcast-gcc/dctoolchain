@@ -1,22 +1,22 @@
-# psptoolchain-allegrex
+# dctoolchain
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/pspdev/psptoolchain-allegrex/CI?label=CI&logo=github&style=for-the-badge)](https://github.com/pspdev/psptoolchain-allegrex/actions?query=workflow%3ACI)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/pspdev/psptoolchain-allegrex/CI-Docker?label=CI-Docker&logo=github&style=for-the-badge)](https://github.com/pspdev/psptoolchain-allegrex/actions?query=workflow%3ACI-Docker)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dreamcast-gcc/dctoolchain/CI?label=CI&logo=github&style=for-the-badge)](https://github.com/dreamcast-gcc/dctoolchain/actions?query=workflow%3ACI)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dreamcast-gcc/dctoolchain/CI-Docker?label=CI-Docker&logo=github&style=for-the-badge)](https://github.com/dreamcast-gcc/pdctoolchain/actions?query=workflow%3ACI-Docker)
 
-This program will automatically build and install a compiler and other tools used in the creation of homebrew software for the Sony Playstation Portable handheld videogame system (PSP).
+This program will automatically build and install a compiler and other tools used in the creation of homebrew software for the Sega Dreamcast.
 
-## **ATENTION!**
+## **ATTENTION!**
 
-If you're trying to install in your machine the **WHOLE PSP Development Environment** this is **NOT** the repo to use, you should use instead the [pspdev](https://github.com/pspdev/pspdev "pspdev") repo.
+If you're trying to install in your machine the **WHOLE Dreamcast Development Environment** this is **NOT** the repo to use, you should use instead the [dcdev](https://github.com/dreamcast-gcc/dcdev "dcdev") repo.
 
 ## What these scripts do
 
 These scripts download (`git clone`) and install:
 
--   [binutils](https://github.com/pspdev/binutils-gdb "binutils")
--   [gdb](https://github.com/pspdev/binutils-gdb "gdb")
--   [gcc](https://github.com/pspdev/gcc "gcc")
--   [newlib](https://github.com/pspdev/newlib "newlib")
+-   [binutils](https://github.com/dreamcast-gcc/binutils-gdb "binutils")
+-   [gdb](https://github.com/dreamcast-gcc/binutils-gdb "gdb")
+-   [gcc](https://github.com/dreamcast-gcc/gcc "gcc")
+-   [newlib](https://github.com/dreamcast-gcc/newlib "newlib")
 
 ## Requirements
 
@@ -40,18 +40,18 @@ sudo ./prepare-mac-os.sh
 [MacPorts]: http://www.macports.org/
 [HomeBrew]: http://brew.sh/
 
-2.  Ensure that you have enough permissions for managing PSPDEV location (default to `/usr/local/pspdev`, but you can use a different path). PSPDEV location MUST NOT have spaces or special characters in its path! PSPDEV should be an absolute path. On Unix systems, if the command `mkdir -p $PSPDEV` fails for you, you can set access for the current user by running commands:
+2.  Ensure that you have enough permissions for managing DCDEV location (default to `/opt/toolchains/dc`, but you can use a different path). DCDEV location MUST NOT have spaces or special characters in its path! DCDEV should be an absolute path. On Unix systems, if the command `mkdir -p $DCDEV` fails for you, you can set access for the current user by running commands:
 ```bash
-export PSPDEV=/usr/local/pspdev
-sudo mkdir -p $PSPDEV
-sudo chown -R $USER: $PSPDEV
+export DCDEV=/opt/toolchains/dc
+sudo mkdir -p $DCDEV
+sudo chown -R $USER: $DCDEV
 ```
 
 3.  Add this to your login script (example: `~/.bash_profile`)
-    **Note:** Ensure that you have full access to the PSPDEV path. You can change the PSPDEV path with the following requirements: only use absolute paths, don't use spaces, only use Latin characters.
+    **Note:** Ensure that you have full access to the DCDEV path. You can change the DCDEV path with the following requirements: only use absolute paths, don't use spaces, only use Latin characters.
 ```bash
-export PSPDEV=/usr/local/pspdev
-export PATH=$PATH:$PSPDEV/bin
+export DCDEV=/opt/toolchains/dc
+export PATH=$PATH:$DCDEV/bin
 ```
 
 4.  Run toolchain.sh

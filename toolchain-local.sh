@@ -1,5 +1,5 @@
-export PSPDEV=$(pwd)/pspdev
-export PATH=$PATH:$PSPDEV/bin
+export DCDEV=$(pwd)/dreamcastdev
+export PATH=$PATH:$DCDEV/bin
 
 ## If specific steps were requested...
 if [ $1 ]; then

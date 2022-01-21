@@ -2,16 +2,16 @@
 # gcc-stage2.sh by Francisco Javier Trujillo Mata (fjtrujy@gmail.com)
 
 ## Download the source code.
-REPO_URL="https://github.com/pspdev/gcc.git"
+REPO_URL="https://github.com/dreamcast-gcc/gcc.git"
 REPO_FOLDER="gcc"
-BRANCH_NAME="allegrex-v9.3.0"
+BRANCH_NAME="dreamcast-v9.3.0"
 if test ! -d "$REPO_FOLDER"; then
 	git clone --depth 1 -b $BRANCH_NAME $REPO_URL && cd $REPO_FOLDER || { exit 1; }
 else
 	cd $REPO_FOLDER && git fetch origin && git reset --hard origin/${BRANCH_NAME} || { exit 1; }
 fi
 
-TARGET="psp"
+TARGET="dreamcast"
 OSVER=$(uname)
 
 ## Apple needs to pretend to be linux
@@ -30,7 +30,7 @@ rm -rf build-$TARGET-stage2 && mkdir build-$TARGET-stage2 && cd build-$TARGET-st
 ## Configure the build.
 ../configure \
   --quiet \
-  --prefix="$PSPDEV" \
+  --prefix="$DCDEV" \
   --target="$TARGET" \
   --enable-languages="c,c++" \
   --with-float=hard \

@@ -2,16 +2,16 @@
 # binutils.sh by Francisco Javier Trujillo Mata (fjtrujy@gmail.com)
 
 ## Download the source code.
-REPO_URL="https://github.com/pspdev/binutils-gdb.git"
+REPO_URL="https://github.com/dreamcast-gcc/binutils-gdb.git"
 REPO_FOLDER="binutils-gdb"
-BRANCH_NAME="allegrex-v2.37.0"
+BRANCH_NAME="dreamcast-v2.37.0"
 if test ! -d "$REPO_FOLDER"; then
 	git clone --depth 1 -b $BRANCH_NAME $REPO_URL $REPO_FOLDER && cd $REPO_FOLDER || { exit 1; }
 else
 	cd $REPO_FOLDER && git fetch origin && git reset --hard origin/${BRANCH_NAME} || { exit 1; }
 fi
 
-TARGET="psp"
+TARGET="dreamcast"
 TARG_XTRA_OPTS=""
 
 ## Determine the maximum number of processes that Make can work with.
@@ -23,7 +23,7 @@ rm -rf build-$TARGET && mkdir build-$TARGET && cd build-$TARGET || { exit 1; }
 ## Configure the build.
 ../configure \
   --quiet \
-  --prefix="$PSPDEV" \
+  --prefix="$DCDEV" \
   --target="$TARGET" \
   --enable-plugins \
   --disable-werror \
