@@ -11,7 +11,7 @@ else
 	cd $REPO_FOLDER && git fetch origin && git reset --hard origin/${BRANCH_NAME} || { exit 1; }
 fi
 
-TARGET="sh-elf"
+TARGET="dreamcast"
 TARG_XTRA_OPTS=""
 
 ## Determine the maximum number of processes that Make can work with.
