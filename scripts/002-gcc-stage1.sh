@@ -1,17 +1,17 @@
 #!/bin/bash
-# gcc-stage2.sh by Francisco Javier Trujillo Mata (fjtrujy@gmail.com)
+# gcc-stage1.sh by Francisco Javier Trujillo Mata (fjtrujy@gmail.com)
 
 ## Download the source code.
 REPO_URL="https://github.com/dreamcast-gcc/gcc.git"
 REPO_FOLDER="gcc"
-BRANCH_NAME="dreamcast-v9.3.0"
+BRANCH_NAME="kos-v9.3.0"
 if test ! -d "$REPO_FOLDER"; then
-	git clone --depth 1 -b $BRANCH_NAME $REPO_URL && cd $REPO_FOLDER || { exit 1; }
+	git clone --depth 1 -b $BRANCH_NAME $REPO_URL $REPO_FOLDER && cd $REPO_FOLDER || { exit 1; }
 else
 	cd $REPO_FOLDER && git fetch origin && git reset --hard origin/${BRANCH_NAME} || { exit 1; }
 fi
 
-TARGET="dreamcast"
+TARGET="sh-elf"
 OSVER=$(uname)
 
 ## Apple needs to pretend to be linux
@@ -25,19 +25,23 @@ fi
 PROC_NR=$(getconf _NPROCESSORS_ONLN)
 
 ## Create and enter the toolchain/build directory
-rm -rf build-$TARGET-stage2 && mkdir build-$TARGET-stage2 && cd build-$TARGET-stage2 || { exit 1; }
+rm -rf mkdir build-$TARGET-stage1 && mkdir build-$TARGET-stage1 && cd build-$TARGET-stage1 || { exit 1; }
 
 ## Configure the build.
 ../configure \
   --quiet \
   --prefix="$DCDEV" \
   --target="$TARGET" \
-  --enable-languages="c,c++" \
-  --with-float=hard \
+  --enable-languages="c" \
+  --with-multilib-list=m4-single-only \
+  --with-endian=little \
+  --with-cpu=m4-single-only \
+  --with-headers=no \
   --with-newlib \
   --disable-libssp \
+  --disable-tls \
   --disable-multilib \
-  --enable-cxx-flags=-G0 \
+  --enable-checking=release \
   $TARG_XTRA_OPTS || { exit 1; }
 
 ## Compile and install.
